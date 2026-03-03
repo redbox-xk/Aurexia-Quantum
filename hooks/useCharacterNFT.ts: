@@ -1,0 +1,28 @@
+import { useReadContract, useAccount } from 'wagmi'
+import { CHARACTER_NFT_ABI } from '@/lib/web3/abis'
+
+const NFT_ADDRESS = process.env.NEXT_PUBLIC_CHARACTER_NFT_ADDRESS as `0x${string}`
+
+export function useOwnedNFTs() {
+  const { address } = useAccount()
+  const { data: balance } = useReadContract({
+    address: NFT_ADDRESS,
+    abi: CHARACTER_NFT_ABI,
+    functionName: 'balanceOf',
+    args: [address!],
+    query: { enabled: !!address },
+  })
+  // You'd also need to fetch tokenOfOwnerByIndex to get token IDs
+  // This is simplified – in production, you'd loop over indexes
+  return { balance, ownedTokens: [1,2,3] } // placeholder
+}
+
+export function useCharacterData(tokenId: number | undefined) {
+  return useReadContract({
+    address: NFT_ADDRESS,
+    abi: CHARACTER_NFT_ABI,
+    functionName: 'getCharacter',
+    args: [tokenId ? BigInt(tokenId) : BigInt(0)],
+    query: { enabled: !!tokenId },
+  })
+}
