@@ -1,35 +1,45 @@
-export const ORIGIN_CLASSES = {
-  VOID_WALKER: {
-    name: "Void Walker",
-    role: "Explorer",
-    description: "Masters of dimensional travel who phase through realities unseen.",
-    color: "#6099ff",
-  },
-  STAR_FORGER: {
-    name: "Star Forger",
-    role: "Builder",
-    description: "Architects of stellar matter who harvest cosmic energy.",
-    color: "#ffc800",
-  },
-  [span_7](start_span)// ... other classes[span_7](end_span)
-};
+export type DimensionType = 'Origin' | 'Resource' | 'Combat' | 'Hidden';
 
-export const DIMENSIONS = [
+export interface Dimension {
+  id: string;
+  name: string;
+  type: DimensionType;
+  description: string;
+  color: string;
+  players: number;
+  difficulty: number;
+  unlocked: boolean;
+}
+
+export const DIMENSIONS: Dimension[] = [
   {
-    id: "genesis",
+    id: "genesis-realm",
     name: "Genesis Realm",
     type: "Origin",
-    description: "The birthplace of all Aurexia explorers.",
-    players: 34291,
+    description: "The birthplace of all Aurexia explorers. High stability, rich in beginner resources.",
     color: "#22c55e",
+    players: 34291,
+    difficulty: 1,
+    unlocked: true,
   },
   {
-    id: "void",
+    id: "quantum-void",
     name: "Quantum Void",
     type: "Hidden",
-    description: "The space between dimensions where gravity bends.",
-    players: 8822,
+    description: "The space between dimensions. Gravity is non-linear and rewards are exponential.",
     color: "#a855f7",
+    players: 8822,
+    difficulty: 5,
+    unlocked: false,
   },
-  [span_8](start_span)// ... maps to all 8 dimensions[span_8](end_span)
+  {
+    id: "crystal-caverns",
+    name: "Crystal Caverns",
+    type: "Resource",
+    description: "Subterranean networks of pure energy. Essential for upgrading NFT attributes.",
+    color: "#3b82f6",
+    players: 12403,
+    difficulty: 3,
+    unlocked: true,
+  }
 ];
